@@ -32,9 +32,12 @@ const Nav = () => {
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex-1 flex gap-5 md:gap-5">
-            <button type="button" className="outline_btn">
-              Create Post
-            </button>
+            <Link href="/create-prompt">
+              <button type="button" className="outline_btn">
+                Create Post
+              </button>
+            </Link>
+
             <button
               type="button"
               onClick={() => {
@@ -58,16 +61,14 @@ const Nav = () => {
           <>
             {providers &&
               Object.values(providers).map((provider: Provider) => (
-                <div className="gap-3 flex">
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className="blue_btn"
-                  >
-                    Sign In
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In with {provider.name}
+                </button>
               ))}
           </>
         )}
@@ -128,7 +129,7 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  Sign In
+                  Sign In with {provider.name}
                 </button>
               ))}
           </>
