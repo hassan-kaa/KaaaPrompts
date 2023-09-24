@@ -6,8 +6,8 @@ const PromptSchema = new Schema({
     unique: [true, "prompt already exists !"],
     required: [true, "prompt is required!"],
   },
-  tag: {
-    type: String,
+  tags: {
+    type: Schema.Types.Array,
     required: [true, "tag is required!"],
   },
   creator: {

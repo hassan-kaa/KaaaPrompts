@@ -30,7 +30,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         ></textarea>
         <label htmlFor="">
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Tag
+            Tags
             <span className="mx-2 font-normal">
               (#product,#webDevelopment,#AI ..)
             </span>
@@ -38,7 +38,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         </label>
         <input
           onChange={(e) => {
-            setPost({ ...post, tag: e.target.value });
+            const tagArray = e.target.value.split(" ");
+            setPost({ ...post, tags: tagArray });
           }}
           value={post.tag}
           placeholder="#tag..."
