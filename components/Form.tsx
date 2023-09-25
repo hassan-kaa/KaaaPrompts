@@ -41,7 +41,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             const tagArray = e.target.value.split(" ");
             setPost({ ...post, tags: tagArray });
           }}
-          value={post.tag}
+          value={post.tags}
           placeholder="#tag..."
           required
           className="form_input"

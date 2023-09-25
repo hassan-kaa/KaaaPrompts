@@ -11,7 +11,9 @@ const Feed = () => {
   };
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/prompt/getAll");
+      const response = await fetch("/api/prompt/getAll", {
+        next: { revalidate: 5 },
+      });
       const data = await response.json();
       setPosts(data.prompts);
     };

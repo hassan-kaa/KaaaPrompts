@@ -3,8 +3,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 const PromptCard = ({ post, handleTagClick }) => {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [copied, setCopied] = useState("");
+  const [dropdown, setDropdown] = useState(false);
   const handleCopy = () => {
     setCopied(post.prompt);
     navigator.clipboard.writeText(post.prompt);
@@ -12,6 +16,18 @@ const PromptCard = ({ post, handleTagClick }) => {
       console.log("now");
       setCopied("");
     }, 2000);
+  };
+  const handleDelete = async () => {
+    const sure = confirm("Are you sure to delete this prompt ?");
+    if (sure) {
+      const response = await fetch(`/api/prompt/${post._id}`, {
+        method: "DELETE",
+      });
+      router.back();
+    }
+  };
+  const toggleDropdown = () => {
+    setDropdown((prev) => !prev);
   };
   return (
     <div className="prompt_card">
@@ -51,36 +67,45 @@ const PromptCard = ({ post, handleTagClick }) => {
             >
               Copied to clipboard
             </span>
-            {/* </div>
-          <div className="copy_btn" onClick={handleCopy}>
-            <Image
-              alt="edit button"
-              width={12}
-              height={12}
-              src={"/assets/icons/tick.svg"}
-            />
-          </div>
-          <div className="copy_btn" onClick={handleCopy}>
-            <Image
-              alt="delete button"
-              width={12}
-              height={12}
-              src={"/assets/icons/link.svg"}
-            /> */}
           </div>
         </div>
+        {
+          //@ts-ignore
+          session?.user.id == post.creator._id && (
+            <div className="copy_btn" onClick={toggleDropdown}>
+              <Image
+                src={"/assets/icons/link.svg"}
+                alt="options"
+                width={12}
+                height={12}
+              />
+              {dropdown && (
+                <span className="dropdown">
+                  <Link href={`/update-prompt/${post._id}`}>
+                    <button className="dropdown_link">Edit</button>
+                  </Link>
+
+                  <button className="dropdown_link" onClick={handleDelete}>
+                    Delete
+                  </button>
+                </span>
+              )}
+            </div>
+          )
+        }
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
-
-      {post.tags.map((tag, index) => (
-        <p
-          className="font-inter text-sm blue_gradient cursor-pointer"
-          onClick={() => handleTagClick && handleTagClick(post.tags)}
-          key={index}
-        >
-          {`${tag}  `}
-        </p>
-      ))}
+      <div className="tags flex gap-2 ">
+        {post.tags.map((tag, index) => (
+          <p
+            className="font-inter text-sm blue_gradient cursor-pointer"
+            onClick={() => handleTagClick && handleTagClick(post.tags)}
+            key={index}
+          >
+            {`${tag}  `}
+          </p>
+        ))}
+      </div>
     </div>
   );
 };
