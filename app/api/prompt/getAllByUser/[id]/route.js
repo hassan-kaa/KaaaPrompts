@@ -1,4 +1,4 @@
-import Prompt from "@models/Prompt";
+import Prompt from "@models/prompt.js";
 import { connectToDB } from "@utils/database";
 import { useRouter } from "next/navigation";
 export const GET = async (req, { params }) => {
