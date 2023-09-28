@@ -1,4 +1,4 @@
-import Prompt from "@models/prompt.js";
+import Prompt from "@models/Prompt.js";
 import { connectToDB } from "@utils/database";
 export const GET = async (req, res) => {
   // const { userId } = await req.json();

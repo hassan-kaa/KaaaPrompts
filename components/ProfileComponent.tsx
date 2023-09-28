@@ -1,7 +1,7 @@
 import React from "react";
 import PromptCard from "./PromptCard";
 
-const Profile = ({ name, handleDelete, handleEdit, desc, data }) => {
+const ProfileCompnent = ({ name, handleDelete, handleEdit, desc, data }) => {
   return (
     <div>
       <h1 className="head_text blue_gradient">{name}</h1>
@@ -15,4 +15,4 @@ const Profile = ({ name, handleDelete, handleEdit, desc, data }) => {
   );
 };
 
-export default Profile;
+export default ProfileCompnent;

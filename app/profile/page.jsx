@@ -1,5 +1,5 @@
 "use client";
-import Profile from "@components/Profile";
+import Profile from "@components/ProfileComponent";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -20,7 +20,7 @@ function Page() {
   return (
     <>
       <Profile
-        name={`${session.user.name}'s Profile`}
+        name={`${session?.user.name}'s Profile`}
         desc="Welcome to your personalized profile page"
         data={posts}
         handleEdit={handleEdit}
