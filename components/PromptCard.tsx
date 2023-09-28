@@ -99,7 +99,7 @@ const PromptCard = ({ post, handleTagClick }) => {
         {post.tags.map((tag, index) => (
           <p
             className="font-inter text-sm blue_gradient cursor-pointer"
-            onClick={() => handleTagClick && handleTagClick(post.tags)}
+            onClick={() => handleTagClick && handleTagClick(tag)}
             key={index}
           >
             {`${tag}  `}
